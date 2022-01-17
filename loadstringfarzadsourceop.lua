@@ -91,7 +91,7 @@ local GetService = setmetatable({}, {
     end
 })
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/lib/main/libfarzad"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/test/main/test2"))()
 local NotifyLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/lib/main/notifyfarzad"))()
 local Notify = NotifyLibrary.Notify
 Library.theme.accentcolor = Color3.new(0.603921, 0.011764, 1)
@@ -450,7 +450,7 @@ local PuppywareSettings = {
             PingBasedPrediction = false,
             GetVelocity = 0.165
         },
-        TargetAimSettings = {
+        RageSection = {
             UnlockTargetKnocked = false,
             NotificationAlert = false,
         },
@@ -661,11 +661,11 @@ local PuppywareModule = {
 }
 
 local Window = Library:CreateWindow("FarzadSexyWare.cc", Vector2.new(492, 598), Enum.KeyCode.RightShift)
-local AimingTab = Window:CreateTab("Aiming")
+local AimingTab = Window:CreateTab("Main")
 
 -- Silent Aim Setion --
 
-local RageSection = AimingTab:CreateSector("Silent Aim", "left")
+local RageSection = AimingTab:CreateSector("Silent", "left")
 local SilentAimToggle = RageSection:AddToggle('Silent Aim Enabled', false, function(Boolean)
     PuppywareSettings.Aiming.SilentAim.Enabled = Boolean
 end)
@@ -696,13 +696,13 @@ RageSection:AddToggle('Grabbed Check', false, function(Boolean)
     PuppywareSettings.Aiming.SilentAim.GrabbedCheck = Boolean
 end)
 
-RageSection:AddDropdown('Hitboxes', {"Head", "HumanoidRootPart"}, {"Head"}, true, function(Value)
+RageSection:AddDropdown('Hitboxes (can choose both)', {"Head", "HumanoidRootPart"}, {"Head"}, true, function(Value)
     PuppywareSettings.Aiming.SilentAim.Hitboxes = Value
 end)
 
 -- Target Aim Setion --
 
-local RageSection = AimingTab:CreateSector("Target Aim", "left")
+local RageSection = AimingTab:CreateSector("Target", "left")
 local TargetAimToggle = RageSection:AddToggle('Target Aim Enabled', false, function(Boolean)
     PuppywareSettings.Aiming.TargetAim.Enabled = Boolean
 end)
@@ -729,42 +729,19 @@ RageSection:AddToggle('Grabbed Check', false, function(Boolean)
     PuppywareSettings.Aiming.TargetAim.GrabbedCheck = Boolean
 end)
 
-RageSection:AddDropdown('Hitboxes', {"Head", "HumanoidRootPart"}, {"Head"}, true, function(Value)
+RageSection:AddDropdown('Hitboxes (can choose both)', {"Head", "HumanoidRootPart"}, {"Head"}, true, function(Value)
     PuppywareSettings.Aiming.TargetAim.Hitboxes = Value
-end)
-
--- Aim Assist FOV Section --
-
-local AimbotFOVSection = AimingTab:CreateSector("FOV", "right")
-AimbotFOVSection:AddToggle('FOV Filled', false, function(Boolean)
-    PuppywareSettings.Aiming.FOV.FOVFilled = Boolean
-end)
-
-AimbotFOVSection:AddSlider("Aim Assist Size", 0, 100, 500, 1, function(Value)
-    PuppywareSettings.Aiming.FOV.AimAssistSize = Value
-end)
-
-AimbotFOVSection:AddSlider("Silent Aim Size", 0, 100, 500, 1, function(Value)
-    PuppywareSettings.Aiming.FOV.SilentAimSize = Value
-end)
-
-AimbotFOVSection:AddSlider("FOV Transparency", 0, 9, 9, 1, function(Value)
-    PuppywareSettings.Aiming.FOV.Transparency = tonumber("0." .. Value)
 end)
 
 -- Aiming Settings Section --
 
-local AimingSettings = AimingTab:CreateSector("Aiming Settings", "right")
+local AimingSettings = AimingTab:CreateSector("Settings", "right")
 
 AimingSettings:AddToggle('Ping Based Prediction', false, function(Boolean)
     PuppywareSettings.Aiming.AimingSettings.PingBasedPrediction = Boolean
 end)
 
-AimingSettings:AddDropdown('Aim Assist Type', {"Camera", "Mouse"}, "Camera", false, function(Option)
-    PuppywareSettings.Aiming.AimingSettings.AimAssistType = Option
-end)
-
-local SmoothingTracing = AimingSettings:AddToggle('Smoothing Tracing', false, function(Boolean)
+local SmoothingTracing = AimingSettings:AddToggle('Smoothness', false, function(Boolean)
     PuppywareSettings.Aiming.AimingSettings.SmoothingTracing = Boolean
 end)
 
@@ -791,16 +768,14 @@ end)
 
 -- Target Aim Settings Section --
 
-local TargetAimSettings = AimingTab:CreateSector("Target Aim Settings", "right")
-
-local TargetBind = TargetAimSettings:AddKeybind("Bind", false, function()
+local TargetBind = RageSection:AddKeybind("Bind", false, function()
     
 end, function()
     if PuppywareSettings.Aiming.TargetAim.Enabled then
         local NearestTarget, NearestDistance = NearestMouse()
         if NearestTarget and Visible(NearestTarget.Character.HumanoidRootPart, LocalPlayer.Character.HumanoidRootPart) then
             PuppywareSettings.Aiming.TargetAim.Target = NearestTarget.Name
-            if PuppywareSettings.Aiming.TargetAimSettings.NotificationAlert then
+            if PuppywareSettings.Aiming.RageSection.NotificationAlert then
                 Notify({
                     Title = "😛 farzad 😛",
                     Description = "Target: " .. NearestTarget.Name,
@@ -811,26 +786,45 @@ end, function()
     end
 end)
 
-TargetAimSettings:AddToggle('Unlock Target Knocked', false, function(State)
-    PuppywareSettings.Aiming.TargetAimSettings.UnlockTargetKnocked = State
+-- Aim Assist FOV Section --
+
+local AimbotFOVSection = AimingTab:CreateSector("FOV", "left")
+AimbotFOVSection:AddToggle('FOV Filled', false, function(Boolean)
+    PuppywareSettings.Aiming.FOV.FOVFilled = Boolean
 end)
 
-TargetAimSettings:AddToggle('Notification Alert', false, function(State)
-    PuppywareSettings.Aiming.TargetAimSettings.NotificationAlert = State
+AimbotFOVSection:AddSlider("Put Same As Silent", 0, 100, 500, 1, function(Value)
+    PuppywareSettings.Aiming.FOV.AimAssistSize = Value
+end)
+
+AimbotFOVSection:AddSlider("Silent Size", 0, 100, 500, 1, function(Value)
+    PuppywareSettings.Aiming.FOV.SilentAimSize = Value
+end)
+
+AimbotFOVSection:AddSlider("FOV Transparency", 0, 9, 9, 1, function(Value)
+    PuppywareSettings.Aiming.FOV.Transparency = tonumber("0." .. Value)
+end)
+
+RageSection:AddToggle('Unlock Target Knocked', false, function(State)
+    PuppywareSettings.Aiming.RageSection.UnlockTargetKnocked = State
+end)
+
+RageSection:AddToggle('Notification Alert', false, function(State)
+    PuppywareSettings.Aiming.RageSection.NotificationAlert = State
 end)
 
 local WhitelistSection = AimingTab:CreateSector("Whitelist", "right")
 
-WhitelistSection:AddToggle('Whitelist Enabled', false, function(State)
+WhitelistSection:AddToggle('Enable', false, function(State)
     PuppywareSettings.Aiming.Whitelist.Enabled = State
 end)
 
-WhitelistSection:AddTextbox("Username", nil, function(Text)
+WhitelistSection:AddTextbox("User", nil, function(Text)
     if Text ~= nil and Find(Text) ~= nil and Players:FindFirstChild(Find(Text)) then
         PuppywareSettings.Aiming.Whitelist.Holder = Find(Text)
     else
         Notify({
-            Title = "Puppyware",
+            Title = "FarzadSexyWare",
             Description = "Player is not found.",
             Duration = 3
         })
@@ -841,21 +835,21 @@ WhitelistSection:AddButton('Add', function(State)
     if PuppywareSettings.Aiming.Whitelist.Holder ~= nil and Players:FindFirstChild(PuppywareSettings.Aiming.Whitelist.Holder) then
         if table.find(PuppywareSettings.Aiming.Whitelist.Players, PuppywareSettings.Aiming.Whitelist.Holder) then
             Notify({
-                Title = "Puppyware",
+                Title = "FarzadSexyWare",
                 Description = PuppywareSettings.Aiming.Whitelist.Holder .. " is whitelisted.",
                 Duration = 3
             })
         else
             Insert(PuppywareSettings.Aiming.Whitelist.Players, PuppywareSettings.Aiming.Whitelist.Holder)
             Notify({
-                Title = "Puppyware",
+                Title = "FarzadSexyWare",
                 Description = "Whitelisted " .. PuppywareSettings.Aiming.Whitelist.Holder,
                 Duration = 3
             })
         end
     else
         Notify({
-            Title = "Puppyware",
+            Title = "FarzadSexyWare",
             Description = "Player is not found.",
             Duration = 3
         })
@@ -867,196 +861,40 @@ WhitelistSection:AddButton('Remove', function()
         if table.find(PuppywareSettings.Aiming.Whitelist.Players, PuppywareSettings.Aiming.Whitelist.Holder) then
             Remove(PuppywareSettings.Aiming.Whitelist.Players, PuppywareSettings.Aiming.Whitelist.Holder)
             Notify({
-                Title = "Puppyware",
+                Title = "FarzadSexyWare",
                 Description = "Removed " .. PuppywareSettings.Aiming.Whitelist.Holder,
                 Duration = 5
             })
         else
             Notify({
-                Title = "Puppyware",
+                Title = "FarzadSexyWare",
                 Description = PuppywareSettings.Aiming.Whitelist.Holder .. " is not whitelisted.",
                 Duration = 5
             })
         end
     else
         Notify({
-            Title = "Puppyware",
+            Title = "FarzadSexyWare",
             Description = "Player is not found.",
             Duration = 3
         })
     end
 end)
 
-WhitelistSection:AddToggle('Crew Whitelist', false, function(State)
+WhitelistSection:AddToggle('Crew', false, function(State)
     PuppywareSettings.Aiming.Whitelist.CrewEnabled = State
 end)
 
-WhitelistSection:AddToggle('Friends Whitelist', false, function(State)
+WhitelistSection:AddToggle('Friends', false, function(State)
     PuppywareSettings.Aiming.Whitelist.FriendsWhitelist = State
 end)
 
--- Visuals Window --
---[[
-    
-local VisualsTab = Window:CreateTab("Visuals")
-local ESPSection = VisualsTab:CreateSector("ESP", "left")
-
-local ESPToggle = ESPSection:AddToggle('ESP Enabled', false, function(Boolean)
-    
-end)
-
-ESPToggle:AddKeybind()
-
-ESPSection:AddToggle('Box ESP', false, function(Boolean)
-    
-end)
-
-ESPSection:AddToggle('Tracer ESP', false, function(Boolean)
-    
-end)
-
-ESPSection:AddToggle('Name ESP', false, function(Boolean)
-    
-end)
-
-ESPSection:AddToggle('Health Bar', false, function(Boolean)
-    
-end)
-
-ESPSection:AddToggle('Armor Bar', false, function(Boolean)
-    
-end)
-
-ESPSection:AddToggle("Wall Check", false, function()
-
-end)
-
-local LocalSection = VisualsTab:CreateSector("Local", "left")
-
-local FOVToggle = LocalSection:AddToggle('FOV Changer', false, function(State)
-
-end)
-
-FOVToggle:AddSlider(70, 90, 120, 1, function(Value)
-    
-end)
-
-local SelfChamToggle = LocalSection:AddToggle('Self Cham', false, function(State)
-
-end)
-
-SelfChamToggle:AddColorpicker(Color3.fromRGB(255, 255, 255), function()
-
-end)
-
-SelfChamToggle:AddDropdown({}, "Ghost", false, function(Option)
-    
-end)
-
-local FakeLagChamToggle = LocalSection:AddToggle('Fake Lag Cham', false, function(State)
-
-end)
-
-FakeLagChamToggle:AddColorpicker(Color3.fromRGB(255, 255, 255), function()
-
-end)
-
-local CrosshairSection = VisualsTab:CreateSector("Drawing Crosshair", "left")
-
-local DrawingCrosshairToggle = CrosshairSection:AddToggle("Crosshair Enabled", false, function()
-
-end)
-
-DrawingCrosshairToggle:AddColorpicker(Color3.fromRGB(255, 255, 255), function()
-
-end)
-
-CrosshairSection:AddSlider("Gap", 0, 1, 5, 1, function(Value)
-    
-end)
-
-CrosshairSection:AddSlider("Size", 0, 3, 10, 1, function(Value)
-    
-end)
-
-local MiscSection = VisualsTab:CreateSector("Misc", "left")
-
-MiscSection:AddToggle("No Flashbag", false, function()
-
-end)
-
-MiscSection:AddToggle("No Recoil", false, function()
-
-end)
-
-local WorldSection = VisualsTab:CreateSector("World", "right")
-
-WorldSection:AddToggle("Better Shadow", false, function()
-
-end)
-
-WorldSection:AddToggle("FullBright", false, function()
-
-end)
-
-local GridiantToggle = WorldSection:AddToggle("Gradiant", false, function()
-
-end)
-
-GridiantToggle:AddColorpicker(Color3.fromRGB(255, 255, 255), function()
-
-end)
-
-GridiantToggle:AddColorpicker(Color3.fromRGB(255, 255, 255), function()
-
-end)
-
-local SaturationToggle = WorldSection:AddToggle("Saturation", false, function()
-
-end)
-
-SaturationToggle:AddSlider(-10, 0, 10, 1, function(Value)
-    
-end)
-
-local BrightnessToggle = WorldSection:AddToggle("Brightness", false, function()
-
-end)
-
-BrightnessToggle:AddSlider(-10, 0, 10, 1, function(Value)
-    
-end)
-
-local ContrastToggle = WorldSection:AddToggle("Contrast", false, function()
-
-end)
-
-ContrastToggle:AddSlider(-10, 0, 10, 1, function(Value)
-    
-end)
-
-local ESPSettings = VisualsTab:CreateSector("ESP Settings", "right")
-
-ESPSettings:AddDropdown('Font', {}, "Plex", false, function(Option)
-    
-end)
-
-ESPSettings:AddDropdown('Text Case', {"Normal", "Uppercase", "Lowercase"}, "Lowercase", false, function(Option)
-    
-end)
-
-ESPSettings:AddToggle("Unlock Tracers", false, function()
-
-end)
-
-ESPSettings:AddSlider("Text Size", 5, 14, 20, 1, function(Value)
-    
-end)
-]]
+--later local VisualsTab = Window:CreateTab("Visuals")
+--later local ESPSection = VisualsTab:CreateSector("ESP", "left")
 
 -- Blatant Tab --
 
-local BlatantTab = Window:CreateTab("Blatant")
+local BlatantTab = Window:CreateTab("Rage")
 
 local MovementSector = BlatantTab:CreateSector("Movement", "right")
 
@@ -1065,6 +903,7 @@ local BlatantAntiAimSector = BlatantTab:CreateSector("Blatant Anti Aim", "left")
 local SpeedToggle = MovementSector:AddToggle('Speed Enabled', false, function(State)
     PuppywareSettings.Blatant.Movement.SpeedEnabled = State
 end)
+SpeedToggle:AddKeybind()
 
 SpeedToggle:AddSlider(0, 5, 10, 1, function(Value)
     PuppywareSettings.Blatant.Movement.SpeedAmount = Value
@@ -1129,32 +968,6 @@ BlatantAntiAimSector:AddSlider("Jitter Angle", 0, 180, 360, 1, function(Value)
     PuppywareSettings.Blatant.BlatantAA.JitterAngle = Value
 end)
 
-local LegitAntiAimSector = BlatantTab:CreateSector("Legit Anti Aim", "left")
-
-local LegitAntiAimToggle = LegitAntiAimSector:AddToggle('Legit AA Enabled', false, function(State)
-    PuppywareSettings.Blatant.LegitAA.Enabled = Value
-end)
-
-LegitAntiAimSector:AddToggle('Anti Aim At', false, function(State)
-    PuppywareSettings.Blatant.LegitAA.AntiAimAt = State
-end)
-
-LegitAntiAimSector:AddSlider("Anti Aim At Distance", 2.5, 20, 100, 1, function(Value)
-    PuppywareSettings.Blatant.LegitAA.AntiAimAtDistance = Value
-end)
-
-local FakeLagSector = BlatantTab:CreateSector("Fake Lag", "left")
-
-local FakeLagToggle = FakeLagSector:AddToggle('Fake Lag Enabled', false, function(State)
-    PuppywareSettings.Blatant.FakeLag.Enabled = State
-end)
-
-FakeLagToggle:AddKeybind()
-
-FakeLagToggle:AddSlider(1, 5, 10, 1, function(Value)
-    PuppywareSettings.Blatant.FakeLag.TriggerAmount = Value
-end)
-
 local MiscSector = BlatantTab:CreateSector("Misc", "left")
 
 MiscSector:AddButton('Invisible', function(State)
@@ -1200,20 +1013,6 @@ GodModeSector:AddButton("God Block", function()
     end)
 end)
 
-local ReachingSector = BlatantTab:CreateSector("Reaching", "right")
-
-local FistReachToggle = ReachingSector:AddToggle('Fist Reach', false, function(State)
-    PuppywareSettings.Blatant.Reaching.FistReach = State
-end)
-
-FistReachToggle:AddKeybind()
-
-local MeleeReachToggle = ReachingSector:AddToggle('Melee Reach', false, function(State)
-    PuppywareSettings.Blatant.Reaching.MeleeReach = State
-end)
-
-MeleeReachToggle:AddKeybind()
-
 local CharacterSector = BlatantTab:CreateSector("Character", "right")
 
 CharacterSector:AddToggle('Anti Stomp', false, function(State)
@@ -1244,38 +1043,128 @@ CharacterSector:AddToggle('Auto Reload', false, function(State)
     PuppywareSettings.Blatant.Character.AutoReload = State
 end)
 
-local FarmingSector = BlatantTab:CreateSector("Farming", "right")
-
-FarmingSector:AddToggle('Shoe Farm', false, function(State)
-    PuppywareSettings.Blatant.Farming.ShoeFarm = State
-end)
-
-FarmingSector:AddToggle('ATM Farm', false, function(State)
-    PuppywareSettings.Blatant.Farming.ATMFarm = State
-end)
-
-FarmingSector:AddToggle('Hospital Farm', false, function(State)
-    PuppywareSettings.Blatant.Farming.HospitalFarm = State
-end)
-
-local BoxFarmToggle = FarmingSector:AddToggle('Box Farm', false, function(State)
-    PuppywareSettings.Blatant.Farming.BoxFarm = State
-end)
-
-BoxFarmToggle:AddKeybind()
-
-FarmingSector:AddDropdown("Muscle Farming Type", {"Normal", "Heavy"}, "Normal", false, function(State)
-    PuppywareSettings.Blatant.Farming.MuscleFarmingType = State
-end)
-
-FarmingSector:AddToggle('Muscle Farm', false, function(State)
-    PuppywareSettings.Blatant.Farming.MuscleFarm = State
-end)
-
-local CashSector = BlatantTab:CreateSector("Cash", "right")
+local CashSector = BlatantTab:CreateSector("Cash", "left")
 
 local AutoDropToggle = CashSector:AddToggle("Auto Drop", false, function(State)
     PuppywareSettings.Blatant.Cash.AutoDrop = State
+end)
+
+local xddowo = BlatantTab:CreateSector("ESP", "right")
+local L_18_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/xfarzad/Esp/main/Esp1"))()
+local nigga1 = xddowo:AddToggle(
+    "ESP",
+    "ESP",
+    function(L_201_arg0)
+	L_18_:Toggle(L_201_arg0)
+end
+)
+nigga1:AddKeybind()
+
+local nigga2 = xddowo:AddToggle(
+    "Tracers",
+    "ESP Tracers",
+    function(L_202_arg0)
+	L_18_.Tracers = L_202_arg0
+end
+)
+nigga2:AddKeybind()
+
+local nigga3 = xddowo:AddToggle("Names","ESP Names",function(L_203_arg0)
+    L_18_.Names = L_203_arg0
+end
+)
+nigga3:AddKeybind()
+
+local nigga4 = xddowo:AddToggle(
+    "Boxes",
+    "ESP Boxes",
+    function(L_204_arg0)
+	L_18_.Boxes = L_204_arg0
+end
+)
+nigga4:AddKeybind()
+
+local tstabxd = BlatantTab:CreateSector("Trash Talk (p)", "right")
+
+tstabxd:AddButton("Enable",function(bool)
+local plr = game.Players.LocalPlayer
+repeat wait() until plr.Character
+local char = plr.Character
+
+local garbage = {
+    "ur bad";
+    "sonney boy";
+    "ez";
+    "my grandma has more skill than you";
+    "seed";
+    "sit son";
+    "trash";
+    "LOL";
+    "LMAO";
+    "imagine being you right now";
+    "xd";
+    "don't try LOL";
+    "you lose";
+    "why do you even try";
+    "I didn't think being this bad was possible";
+    "leave";
+    "no skill";
+    "so sad man.";
+    "bad";
+    "you're nothing";
+    "lol";
+    "so trash";
+    "so bad";
+    "ur salty";
+    "salty";
+    "look he's mad";
+    "cry more";
+    "keep crying";
+    "cry baby";
+    "hahaha I won";
+    "no one likes u";
+    "run 1s seed";
+    "thank you for your time";
+    "you were so close!";
+    "better luck next time!";
+    "rodent";
+    "HAHA";
+    "ill 5-0";
+    "just quit";
+    "time to take out the trash";
+    "did you get worse?";
+    "I'm surprised you haven't quit yet";
+    "dog aim";
+    "log out son";
+
+
+
+
+
+
+
+
+
+
+}
+
+
+function TrashTalk(inputObject, gameProcessedEvent)
+    if inputObject.KeyCode == Enum.KeyCode.P and gameProcessedEvent == false then        
+game.ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(
+        garbage[math.random(1,#garbage)],
+        "All"
+    )
+    end
+end
+     
+game:GetService("UserInputService").InputBegan:connect(TrashTalk)
+end)
+
+local niggaxd = BlatantTab:CreateSector("Crash server", "left")
+
+niggaxd:AddButton('Crash', function(State)
+loadstring(game:HttpGet("https://raw.githubusercontent.com/22kristina/dhcrash_gen2/main/crash", true))()
 end)
 
 AutoDropToggle:AddSlider(1000, 5000, 10000, 1, function(Value)
@@ -1288,186 +1177,8 @@ end)
 
 -- Auto Buy Tab --
 
-local TeleportTab = Window:CreateTab("Teleport")
-
-local TeleportModule = {
-    Food = PuppywareModule.Teleport.Food[1],
-    Gun = PuppywareModule.Teleport.Gun[1],
-    Location = PuppywareModule.Teleport.Location[1],
-    Armor = PuppywareModule.Teleport.Armor[1],
-    Melee = PuppywareModule.Teleport.Melee[1],
-    Extra = PuppywareModule.Teleport.Extra[1],
-    Bike = PuppywareModule.Teleport.Bike[1],
-    Mask = PuppywareModule.Teleport.Mask[1],
-    Phone = PuppywareModule.Teleport.Phone[1],
-    Weight = PuppywareModule.Teleport.Weight[1],
-    AutoSet = {
-        Tools = {}
-    }
-}
-
-local FoodSector = TeleportTab:CreateSector("Food Teleport", "left")
-FoodSector:AddDropdown("Food Selection", PuppywareModule.Teleport.Food, PuppywareModule.Teleport.Food[1], false, function(Value)
-    TeleportModule.Food = Value
-end)
-
-FoodSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Food))
-end)
-
-local GunSector = TeleportTab:CreateSector("Gun Teleport", "left")
-GunSector:AddDropdown("Gun Selection", PuppywareModule.Teleport.Gun, PuppywareModule.Teleport.Gun[1], false, function(Value)
-    TeleportModule.Gun = Value
-end)
-
-GunSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Gun))
-    spawn(function()
-        for i = 1, PuppywareSettings.Teleport.AmmoPurchaseAmount do
-            TeleportBuy(ToolAmmo(TeleportModule.Gun))
-            wait(1)
-        end
-    end)
-end)
-
-local LocationSector = TeleportTab:CreateSector("Location Teleport", "left")
-LocationSector:AddDropdown("Location Selection", PuppywareModule.Teleport.Location, PuppywareModule.Teleport.Location[1], false, function(Value)
-    TeleportModule.Location = Value
-end)
-
-LocationSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Location))
-end)
-
-local ArmorSector = TeleportTab:CreateSector("Armor Teleport", "left")
-ArmorSector:AddDropdown("Armor Selection", PuppywareModule.Teleport.Armor, PuppywareModule.Teleport.Armor[1], false, function(Value)
-    TeleportModule.Armor = Value
-end)
-
-ArmorSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Armor))
-end)
-
-local MeleeSector = TeleportTab:CreateSector("Melee Teleport", "left")
-MeleeSector:AddDropdown("Melee Selection", PuppywareModule.Teleport.Melee, PuppywareModule.Teleport.Melee[1], false, function(Value)
-    TeleportModule.Melee = Value
-end)
-
-MeleeSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Melee))
-end)
-
-local ExtraSector = TeleportTab:CreateSector("Extra Teleport", "left")
-ExtraSector:AddDropdown("Extra Selection", PuppywareModule.Teleport.Extra, PuppywareModule.Teleport.Extra[1], false, function(Value)
-    TeleportModule.Extra = Value
-end)
-
-ExtraSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Extra))
-end)
-
-local BikeSector = TeleportTab:CreateSector("Bike Teleport", "left")
-BikeSector:AddDropdown("Bike Selection", PuppywareModule.Teleport.Bike, PuppywareModule.Teleport.Bike[1], false, function(Value)
-    TeleportModule.Bike = Value
-end)
-
-BikeSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Bike))
-end)
-
-local MaskSector = TeleportTab:CreateSector("Mask Teleport", "left")
-MaskSector:AddDropdown("Mask Selection", PuppywareModule.Teleport.Mask, PuppywareModule.Teleport.Mask[1], false, function(Value)
-    TeleportModule.Mask = Value
-end)
-
-MaskSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Mask))
-end)
-
-local PhoneSector = TeleportTab:CreateSector("Phone Teleport", "left")
-PhoneSector:AddDropdown("Phone Selection", PuppywareModule.Teleport.Phone, PuppywareModule.Teleport.Phone[1], false, function(Value)
-    TeleportModule.Phone = Value
-end)
-
-PhoneSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Phone))
-end)
-
-local WeightSector = TeleportTab:CreateSector("Weight Teleport", "left")
-WeightSector:AddDropdown("Weight Selection", PuppywareModule.Teleport.Weight, PuppywareModule.Teleport.Weight[1], false, function(Value)
-    TeleportModule.Weight = Value
-end)
-
-WeightSector:AddButton("Teleport", function()
-    TeleportBuy(ToolName(TeleportModule.Weight))
-end)
-
-local TeleportSettings = TeleportTab:CreateSector("Teleport Settings", "right")
-TeleportSettings:AddToggle("Teleport Return", false, function(State)
-    PuppywareSettings.Teleport.TeleportReturn = State
-end)
-
-TeleportSettings:AddSlider("Return Delay", 0, 1, 100, 1, function(Value)
-    PuppywareSettings.Teleport.ReturnDelay = Value
-end)
-
-TeleportSettings:AddToggle("Auto Purchase", false, function(State)
-    PuppywareSettings.Teleport.AutoPurchase = State
-end)
-
-TeleportSettings:AddSlider("Ammo Purchase Amount", 0, 1, 100, 1, function(Value)
-    PuppywareSettings.Teleport.AmmoPurchaseAmount = Value
-end)
-
-local AutoSetTab = TeleportTab:CreateSector("Auto Set", "right")
-for i, v in pairs(PuppywareModule.Teleport.Armor) do
-    AutoSetTab:AddToggle(v, false, function(State)
-        if State then
-            if not table.find(TeleportModule.AutoSet.Tools, v) then
-                table.insert(TeleportModule.AutoSet.Tools, v)
-            end
-        else
-            Remove(TeleportModule.AutoSet.Tools, v)
-        end
-    end)
-end
-
-for i, v in pairs(PuppywareModule.Teleport.Gun) do
-    AutoSetTab:AddToggle(v, false, function(State)
-        if State then
-            if not table.find(TeleportModule.AutoSet.Tools, v) then
-                table.insert(TeleportModule.AutoSet.Tools, v)
-            end
-        else
-            Remove(TeleportModule.AutoSet.Tools, v)
-        end
-    end)
-end
-
-AutoSetTab:AddButton("Teleport", function()
-    if Alive(LocalPlayer) then
-        for i, v in pairs(TeleportModule.AutoSet.Tools) do
-            if string.find(v:lower(), "armor") then
-                if PuppywareSettings.Teleport.ArmorValueCheck and LocalPlayer.Character.BodyEffects.Armor.Value < 0 then
-                    TeleportBuy(ToolName(v, true))
-                else
-                    TeleportBuy(ToolName(v, true))
-                end
-            else
-                TeleportBuy(ToolName(v, true))
-                spawn(function()
-                    for i = 1, PuppywareSettings.Teleport.AmmoPurchaseAmount do
-                        TeleportBuy(ToolAmmo(v), true)
-                        wait(1)
-                    end
-                end)
-            end
-        end
-    end
-end)
-
 -- Miscellaneous Window --
-local MiscellaneousTab = Window:CreateTab("Miscellaneous")
+local MiscellaneousTab = Window:CreateTab("Animations")
 
 LocalPlayer.CharacterAdded:Connect(function()
     wait(0.5)
@@ -1672,13 +1383,13 @@ end)
 
 -- Settings Window --
 
-local SettingsTab = Window:CreateTab("Settings")
+local SettingsTab = Window:CreateTab("Save")
 
 if syn then
     SettingsTab:CreateConfigSystem("left")
 else
     Notify({
-        Title = "Puppyware",
+        Title = "FarzadSexyWare",
         Description = "Your Executor Doesn't Support Config.",
         Duration = 3
     })
@@ -2082,103 +1793,6 @@ spawn(function()
                     Buy("[High-Medium Armor] - $2300", 0.5, true)
                 end
             end
-            if PuppywareSettings.Blatant.Farming.MuscleFarm then
-                pcall(function()
-                    if PuppywareSettings.Blatant.Farming.MuscleFarmingType == "Normal" then
-                        if not LocalPlayer.Backpack:FindFirstChild("[Weights]") then
-                            Buy("[Weights] - $120", 1)
-                        end
-                        if LocalPlayer.Backpack:FindFirstChild("[Weights]") then
-                            LocalPlayer.Character.Humanoid:EquipTool(LocalPlayer.Backpack["[Weights]"])
-                        end
-                        LocalPlayer.Character["[Weights]"]:Activate()
-                    end
-                    if PuppywareSettings.Blatant.Farming.MuscleFarmingType == "Heavy" then
-                        if not LocalPlayer.Backpack:FindFirstChild("[HeavyWeights]") then
-                            Buy("[HeavyWeights] - $250", 1)
-                        end
-                        if LocalPlayer.Backpack:FindFirstChild("[HeavyWeights]") then
-                            LocalPlayer.Character.Humanoid:EquipTool(LocalPlayer.Backpack["[HeavyWeights]"])
-                        end
-                        LocalPlayer.Character["[HeavyWeights]"]:Activate()
-                    end
-                end)
-            end
-            if PuppywareSettings.Blatant.Farming.ShoeFarm then
-                pcall(function()
-                    for i, v in pairs(Workspace.Ignored.Drop:GetChildren()) do
-                        if v.Name == "MeshPart" then
-                            LocalPlayer.Character.HumanoidRootPart.CFrame = v.CFrame * CFrame.new(0, 2, 0)
-                            local ShoeDistance = (v.Position - LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
-                            if ShoeDistance < 25 then
-                                fireclickdetector(v.ClickDetector)
-                            end
-                        else
-                            fireclickdetector(Workspace.Ignored["Clean the shoes on the floor and come to me for cash"].ClickDetector)
-                        end
-                    end
-                end)
-            end
-            if PuppywareSettings.Blatant.Farming.HospitalFarm then
-                LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(116, 23, -479)
-                for _, v in pairs(Workspace.Ignored.HospitalJob:GetChildren()) do
-                    if v.Name == "Can I get the Green bottle" then
-                        fireclickdetector(v.Parent.Green.ClickDetector)
-                        wait(1)
-                        fireclickdetector(v.ClickDetector)
-                    end
-                    if v.Name == "Can I get the Blue bottle" then
-                        fireclickdetector(v.Parent.Blue.ClickDetector)
-                        wait(1)
-                        fireclickdetector(v.ClickDetector)
-                    end
-                    if v.Name == "Can I get the Red bottle" then
-                        fireclickdetector(v.Parent.Red.ClickDetector)
-                        wait(1)
-                        fireclickdetector(v.ClickDetector)
-                    end
-                end
-            end
-            if PuppywareSettings.Blatant.Farming.BoxFarm then
-                pcall(function()
-                    LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.MAP.Map.ArenaBOX.PunchingBagInGame["pretty ransom"].CFrame * CFrame.new(0, -1, 3)
-                    if LocalPlayer.Backpack:FindFirstChild("Combat") then
-                        LocalPlayer.Backpack.Combat.Parent = LocalPlayer.Character
-                    end
-                end)
-                mouse1click()
-            end
-        end
-    end
-end)
-
-spawn(function()
-    while wait() do
-        if PuppywareSettings.Blatant.Farming.ATMFarm then
-            for _, v in pairs(Workspace.Cashiers:GetChildren()) do
-                if v:FindFirstChild("Head") and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 then
-                    repeat
-                        PuppywareSettings.Blatant.Farming.ATMPick = false
-                        wait()
-                        if PuppywareSettings.Blatant.Farming.ATMFarm then
-                            if Alive(LocalPlayer) then
-                                LocalPlayer.Character.HumanoidRootPart.CFrame = v.Head.CFrame * CFrame.new(0, -1, 2.5)
-                                if LocalPlayer.Backpack:FindFirstChild("Combat") then
-                                    LocalPlayer.Backpack.Combat.Parent = LocalPlayer.Character
-                                end
-                                --if LocalPlayer.Character:FindFirstChild("Combat") then
-                                    LocalPlayer.Character["Combat"]:Activate()
-                                --end
-                            end
-                        end
-                    until v.Humanoid.Health <= 0 or not PuppywareSettings.Blatant.Farming.ATMFarm
-                    pcall(function()
-                        LocalPlayer.Character:FindFirstChildOfClass("Tool").Parent = LocalPlayer.Backpack
-                    end)
-                    PuppywareSettings.Blatant.Farming.ATMPick = true
-                    wait(5)
-                end
-            end
         end
     end
 end)
@@ -2235,45 +1849,6 @@ RunService.RenderStepped:Connect(function()
                 end
             end
         end
-        if PuppywareSettings.Blatant.Reaching.FistReach and LocalPlayer.Character.LeftHand.Transparency ~= 1 then
-            LocalPlayer.Character.LeftHand.Size = Vector3.new(45, 45, 45)
-            LocalPlayer.Character.RightHand.Size = Vector3.new(45, 45, 45)
-            LocalPlayer.Character.RightHand.Massless = true
-            LocalPlayer.Character.LeftHand.Massless = true
-            LocalPlayer.Character.RightHand.Transparency = 1
-            LocalPlayer.Character.LeftHand.Transparency = 1
-        end
-        if PuppywareSettings.Blatant.Reaching.MeleeReach then
-            local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool")
-            if Tool ~= nil and not Tool:FindFirstChild("Ammo") and TableLowerFind(PuppywareModule.Teleport.Melee, Tool.Name) ~= nil and Tool:FindFirstChild("Handle") then
-                if Tool.Handle.Transparency ~= 1 then
-                    Tool.Handle.Size = Vector3.new(45, 45, 45)
-                    Tool.Handle.Transparency = 1
-                end
-            end
-        else
-            local Tool = LocalPlayer.Character:FindFirstChildOfClass("Tool")
-            if Tool ~= nil and not Tool:FindFirstChild("Ammo") and TableLowerFind(PuppywareModule.Teleport.Melee, Tool.Name) ~= nil and Tool:FindFirstChild("Handle") then
-                if Tool.Handle.Transparency == 1 then
-                    if Tool.Name == "knife" then
-                        Tool.Handle.Size = Vector3.new(2.19574, 0.449288, 0.102495)
-                    end
-                    if Tool.Name == "bat" then
-                        Tool.Handle.Size = Vector3.new(0.559523, 4.68133, 0.559523)
-                    end
-                    if Tool.Name == "pencil" then
-                        Tool.Handle.Size = Vector3.new(0.375586, 1.9, 0.375587)
-                    end
-                    if Tool.Name == "pitchfork" then
-                        Tool.Handle.Size = Vector3.new(1.0553, 5.86135, 0.316619)
-                    end
-                    if Tool.Name == "shovel" then
-                        Tool.Handle.Size = Vector3.new(1.68383, 5.903, 0.337731)
-                    end
-                    Tool.Handle.Transparency = 0
-                end
-            end
-        end
         if PuppywareSettings.Blatant.LegitAA.Enabled then
             if PuppywareSettings.Blatant.LegitAA.AntiPointAt then
                 for i, v in next, Players:GetPlayers() do
@@ -2305,10 +1880,10 @@ RunService.RenderStepped:Connect(function()
             LocalPlayer.Character.Humanoid.AutoRotate = true
         end
     end
-    if PuppywareSettings.Aiming.TargetAimSettings.UnlockTargetKnocked then
-        if PuppywareSettings.Aiming.TargetAimSettings.Target ~= nil and Players:FindFirstChild(PuppywareSettings.Aiming.TargetAimSettings.Target) then
-            if Knocked(Players:FindFirstChild(PuppywareSettings.Aiming.TargetAimSettings.Target)) then
-                PuppywareSettings.Aiming.TargetAimSettings.Target = nil
+    if PuppywareSettings.Aiming.RageSection.UnlockTargetKnocked then
+        if PuppywareSettings.Aiming.RageSection.Target ~= nil and Players:FindFirstChild(PuppywareSettings.Aiming.RageSection.Target) then
+            if Knocked(Players:FindFirstChild(PuppywareSettings.Aiming.RageSection.Target)) then
+                PuppywareSettings.Aiming.RageSection.Target = nil
             end
         end
     end
@@ -2340,7 +1915,7 @@ RunService.RenderStepped:Connect(function()
 
             if NearestTarget and (not PuppywareSettings.Aiming.Aimbot.GrabbedCheck or not Grabbing(NearestTarget)) and (not PuppywareSettings.Aiming.Aimbot.KnockedOutCheck or not Knocked(NearestTarget)) and (not PuppywareSettings.Aiming.Aimbot.ShowFOV or PuppywareSettings.Aiming.FOV.AimAssistSize > NearestDistance) and (not PuppywareSettings.Aiming.Aimbot.WallCheck or Visible(NearestTarget.Character.HumanoidRootPart, LocalPlayer.Character.HumanoidRootPart)) then
                 local TargetPart = (NearestTarget.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall and NearestTarget.Character.LeftFoot or NearestTarget.Character[RandomTable(PuppywareSettings.Aiming.Aimbot.Hitboxes)])
-                local Prediction = (PuppywareSettings.Aiming.TargetAimSettings.MovementPrediction and TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.TargetAimSettings.MovementPredictionAmount) or TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.AimingSettings.GetVelocity))
+                local Prediction = (PuppywareSettings.Aiming.RageSection.MovementPrediction and TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.RageSection.MovementPredictionAmount) or TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.AimingSettings.GetVelocity))
                 
                 if PuppywareSettings.Aiming.AimbotSettings.AimAssistType == "Mouse" then
                     local NearestPosition, NearestVisible = CurrentCamera:WorldToScreenPoint(Prediction.Position)
@@ -2419,7 +1994,7 @@ __index = hookmetamethod(game, "__index", function(self, key)
             if PuppywareSettings.Aiming.TargetAim.Target ~= nil and ChanceTable(PuppywareSettings.Aiming.AimingSettings.HitChanceAmount) == "HitPercent" then
                 if Players:FindFirstChild(PuppywareSettings.Aiming.TargetAim.Target) ~= nil and (not PuppywareSettings.Aiming.TargetAim.GrabbedCheck or not Grabbing(Players[PuppywareSettings.Aiming.TargetAim.Target])) and (not PuppywareSettings.Aiming.TargetAim.KnockedOutCheck or not Knocked(Players[PuppywareSettings.Aiming.TargetAim.Target])) and (not PuppywareSettings.Aiming.TargetAim.ShowFOV or PuppywareSettings.Aiming.FOV.TargetAimSize > (LocalPlayer.Character.Head.Position - Players[PuppywareSettings.Aiming.TargetAim.Target].Character.Head.Position).Magnitude) and (not PuppywareSettings.Aiming.TargetAim.WallCheck or Visible(Players[PuppywareSettings.Aiming.TargetAim.Target].Character.HumanoidRootPart, LocalPlayer.Character.HumanoidRootPart)) then
                     local TargetPart = (Players[PuppywareSettings.Aiming.TargetAim.Target].Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall and Players[PuppywareSettings.Aiming.TargetAim.Target].Character.LeftFoot or Players[PuppywareSettings.Aiming.TargetAim.Target].Character[RandomTable(PuppywareSettings.Aiming.TargetAim.Hitboxes)])
-                    local Prediction = (PuppywareSettings.Aiming.TargetAimSettings.MovementPrediction and TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.TargetAimSettings.MovementPredictionAmount) or TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.AimingSettings.GetVelocity))
+                    local Prediction = (PuppywareSettings.Aiming.RageSection.MovementPrediction and TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.RageSection.MovementPredictionAmount) or TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.AimingSettings.GetVelocity))
 
                     return (tostring(key) == "Hit" and Prediction or tostring(key) == "Target" and TargetPart)
                 end
@@ -2430,7 +2005,7 @@ __index = hookmetamethod(game, "__index", function(self, key)
     
                 if NearestTarget and (not PuppywareSettings.Aiming.SilentAim.GrabbedCheck or not Grabbing(NearestTarget)) and (not PuppywareSettings.Aiming.SilentAim.KnockedOutCheck or not Knocked(NearestTarget)) and (not PuppywareSettings.Aiming.SilentAim.ShowFOV or PuppywareSettings.Aiming.FOV.SilentAimSize > NearestDistance) and (not PuppywareSettings.Aiming.SilentAim.WallCheck or IsVisible(NearestTarget.Character.Head.Position, {NearestTarget.Character, LocalPlayer.Character, CurrentCamera}) == true) then
                     local TargetPart = (NearestTarget.Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall and NearestTarget.Character.LeftFoot or NearestTarget.Character[RandomTable(PuppywareSettings.Aiming.SilentAim.Hitboxes)])
-                    local Prediction = (PuppywareSettings.Aiming.TargetAimSettings.MovementPrediction and TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.TargetAimSettings.MovementPredictionAmount) or TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.AimingSettings.GetVelocity))
+                    local Prediction = (PuppywareSettings.Aiming.RageSection.MovementPrediction and TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.RageSection.MovementPredictionAmount) or TargetPart.CFrame + (TargetPart.Velocity * PuppywareSettings.Aiming.AimingSettings.GetVelocity))
     
                     return (tostring(key) == "Hit" and Prediction or tostring(key) == "Target" and TargetPart)
                 end

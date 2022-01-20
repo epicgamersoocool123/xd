@@ -737,7 +737,7 @@ end)
 
 local farzadowoxd1 = AimingTab:CreateSector("🟣 lock", "right")
 
-farzadowoxd1:AddButton("Enable (Q)", function(value)
+farzadowoxd1:AddButton("Enable (B)", function(value)
 
     loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/purple/main/purple"))()
 end)

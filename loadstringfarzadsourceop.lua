@@ -1158,35 +1158,6 @@ BlatantAntiAimSector:AddToggle('No Auto Rotate', false, function(State)
     PuppywareSettings.Blatant.BlatantAA.NoAutoRotate = State
 end)
 
-local UndergroundWallBangToggle = BlatantAntiAimSector:AddToggle('Underground Wallbang', false, function(State)
-    pcall(function()
-        if State then
-			wait(0.5)
-			Float = Instance.new("BodyVelocity")
-			Float.Parent = LocalPlayer.Character.HumanoidRootPart
-			Float.MaxForce = Vector3.new(100000, 100000, 100000)
-			Float.Velocity = Vector3.new(0, 0, 0)
-			wait(0.25)
-			LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -9.5, 0)
-			Cham(LocalPlayer, true)
-			PuppywareSettings.Blatant.BlatantAA.UndergroundWallbang = true
-            SpeedToggle:Set(true)
-		else
-			LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, 9.5, 0)
-			Cham(LocalPlayer, false)
-			Float:Destroy()
-			PuppywareSettings.Blatant.BlatantAA.UndergroundWallbang = false
-            SpeedToggle:Set(false)
-		end
-    end)
-end)
-
-UndergroundWallBangToggle:AddKeybind()
-
-BlatantAntiAimSector:AddToggle('Underground', false, function(State)
-    PuppywareSettings.Blatant.BlatantAA.Underground = State
-end)
-
 BlatantAntiAimSector:AddDropdown("Anti Aim Type", {"Jitter", "Spin"}, "Jitter", false, function(Value)
     PuppywareSettings.Blatant.BlatantAA.AntiAimType = Value
 end)

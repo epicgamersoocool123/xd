@@ -1,7 +1,4 @@
-local plr = game:GetService("Players").LocalPlayer
-if plr:IsInGroup("12096344") then
-
-    local admins = {"2hot4gizem"}
+local admins = {"2hot4gizem"}
     local commands = {"tp","usingsilent","void","kick,ban"}
     local prefix = ";"
     
@@ -91,10 +88,10 @@ local GetService = setmetatable({}, {
     end
 })
 
-local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/test/main/test2"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/purple/main/tt5"))()
 local NotifyLibrary = loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/lib/main/notifyfarzad"))()
 local Notify = NotifyLibrary.Notify
-Library.theme.accentcolor = Color3.new(0.603921, 0.011764, 1)
+Library.theme.accentcolor = Color3.new(0.8524, 0, 0.1242)
 
 local RunService = GetService.RunService
 local Players = GetService.Players
@@ -114,286 +111,6 @@ PuppywareFolder.Name = "PuppyWare-Folder"
 local StarterGui = GetService.StarterGui
 local ReplicatedStorage = GetService.ReplicatedStorage
 
-local AnimationModule = {
-    Astronaut = {
-        "rbxassetid://891621366",
-        "rbxassetid://891633237",
-        "rbxassetid://891667138",
-        "rbxassetid://891636393",
-        "rbxassetid://891627522",
-        "rbxassetid://891609353",
-        "rbxassetid://891617961"
-    },
-    Bubbly = {
-        "rbxassetid://910004836",
-        "rbxassetid://910009958",
-        "rbxassetid://910034870",
-        "rbxassetid://910025107",
-        "rbxassetid://910016857",
-        "rbxassetid://910001910",
-        "rbxassetid://910030921",
-        "rbxassetid://910028158"
-    },
-    Cartoony = {
-        "rbxassetid://742637544",
-        "rbxassetid://742638445",
-        "rbxassetid://742640026",
-        "rbxassetid://742638842",
-        "rbxassetid://742637942",
-        "rbxassetid://742636889",
-        "rbxassetid://742637151"
-    },
-    Confindent = {
-        "rbxassetid://1069977950",
-        "rbxassetid://1069987858",
-        "rbxassetid://1070017263",
-        "rbxassetid://1070001516",
-        "rbxassetid://1069984524",
-        "rbxassetid://1069946257",
-        "rbxassetid://1069973677"
-    },
-    Cowboy = {
-        "rbxassetid://1014390418",
-        "rbxassetid://1014398616",
-        "rbxassetid://1014421541",
-        "rbxassetid://1014401683",
-        "rbxassetid://1014394726",
-        "rbxassetid://1014380606",
-        "rbxassetid://1014384571"
-    },
-    Default = {
-        "http://www.roblox.com/asset/?id=507766666",
-        "http://www.roblox.com/asset/?id=507766951",
-        "http://www.roblox.com/asset/?id=507777826",
-        "http://www.roblox.com/asset/?id=507767714",
-        "http://www.roblox.com/asset/?id=507765000",
-        "http://www.roblox.com/asset/?id=507765644",
-        "http://www.roblox.com/asset/?id=507767968"
-    },
-    Elder = {
-        "rbxassetid://845397899",
-        "rbxassetid://845400520",
-        "rbxassetid://845403856",
-        "rbxassetid://845386501",
-        "rbxassetid://845398858",
-        "rbxassetid://845392038",
-        "rbxassetid://845396048" 
-    },
-    Ghost = {
-        "rbxassetid://616006778",
-        "rbxassetid://616008087",
-        "rbxassetid://616013216",
-        "rbxassetid://616013216",
-        "rbxassetid://616008936",
-        "rbxassetid://616005863",
-        "rbxassetid://616012453",
-        "rbxassetid://616011509"
-    },
-    Knight = {
-        "rbxassetid://657595757",
-        "rbxassetid://657568135",
-        "rbxassetid://657552124",
-        "rbxassetid://657564596",
-        "rbxassetid://658409194",
-        "rbxassetid://658360781",
-        "rbxassetid://657600338"
-    },
-    Levitation = {
-        "rbxassetid://616006778",
-        "rbxassetid://616008087",
-        "rbxassetid://616013216",
-        "rbxassetid://616010382",
-        "rbxassetid://616008936",
-        "rbxassetid://616003713",
-        "rbxassetid://616005863"
-    },
-    Mage = {
-        "rbxassetid://707742142",
-        "rbxassetid://707855907",
-        "rbxassetid://707897309",
-        "rbxassetid://707861613",
-        "rbxassetid://707853694",
-        "rbxassetid://707826056",
-        "rbxassetid://707829716"
-    },
-    Ninja = {
-        "rbxassetid://656117400",
-        "rbxassetid://656118341",
-        "rbxassetid://656121766",
-        "rbxassetid://656118852",
-        "rbxassetid://656117878",
-        "rbxassetid://656114359",
-        "rbxassetid://656115606"
-    },
-    OldSchool = {
-        "rbxassetid://5319828216",
-        "rbxassetid://5319831086",
-        "rbxassetid://5319847204",
-        "rbxassetid://5319844329",
-        "rbxassetid://5319841935",
-        "rbxassetid://5319839762",
-        "rbxassetid://5319852613",
-        "rbxassetid://5319850266"
-    },
-    Patrol = {
-        "rbxassetid://1149612882",
-        "rbxassetid://1150842221",
-        "rbxassetid://1151231493",
-        "rbxassetid://1150967949",
-        "rbxassetid://1148811837",
-        "rbxassetid://1148811837",
-        "rbxassetid://1148863382"
-    },
-    Pirtate = {
-        "rbxassetid://750781874",
-        "rbxassetid://750782770",
-        "rbxassetid://750785693",
-        "rbxassetid://750783738",
-        "rbxassetid://750782230",
-        "rbxassetid://750779899",
-        "rbxassetid://750780242"
-    },
-    Popstar = {
-        "rbxassetid://1212900985",
-        "rbxassetid://1150842221",
-        "rbxassetid://1212980338",
-        "rbxassetid://1212980348",
-        "rbxassetid://1212954642",
-        "rbxassetid://1213044953",
-        "rbxassetid://1212900995"
-    },
-    Princess = {
-        "rbxassetid://941003647",
-        "rbxassetid://941013098",
-        "rbxassetid://941028902",
-        "rbxassetid://941015281",
-        "rbxassetid://941008832",
-        "rbxassetid://940996062",
-        "rbxassetid://941000007"
-    },
-    Robot = {
-        "rbxassetid://616088211",
-        "rbxassetid://616089559",
-        "rbxassetid://616095330",
-        "rbxassetid://616091570",
-        "rbxassetid://616090535",
-        "rbxassetid://616086039",
-        "rbxassetid://616087089"
-    },
-    Rthro = {
-        "rbxassetid://2510196951",
-        "rbxassetid://2510197257",
-        "rbxassetid://2510202577",
-        "rbxassetid://2510198475",
-        "rbxassetid://2510197830",
-        "rbxassetid://2510195892",
-        "rbxassetid://02510201162",
-        "rbxassetid://2510199791",
-        "rbxassetid://2510192778"
-    },
-    Sneaky = {
-        "rbxassetid://1132473842",
-        "rbxassetid://1132477671",
-        "rbxassetid://1132510133",
-        "rbxassetid://1132494274",
-        "rbxassetid://1132489853",
-        "rbxassetid://1132461372",
-        "rbxassetid://1132469004"
-    },
-    Stylish = {
-        "rbxassetid://616136790",
-        "rbxassetid://616138447",
-        "rbxassetid://616146177",
-        "rbxassetid://616140816",
-        "rbxassetid://616139451",
-        "rbxassetid://616133594",
-        "rbxassetid://616134815"
-    },
-    Superhero = {
-        "rbxassetid://782841498",
-        "rbxassetid://782845736",
-        "rbxassetid://782843345",
-        "rbxassetid://782842708",
-        "rbxassetid://782847020",
-        "rbxassetid://782843869",
-        "rbxassetid://782846423"
-    },
-    Toy = {
-        "rbxassetid://782841498",
-        "rbxassetid://782845736",
-        "rbxassetid://782843345",
-        "rbxassetid://782842708",
-        "rbxassetid://782847020",
-        "rbxassetid://782843869",
-        "rbxassetid://782846423"
-    },
-    Vampire = {
-        "rbxassetid://1083445855",
-        "rbxassetid://1083450166",
-        "rbxassetid://1083473930",
-        "rbxassetid://1083462077",
-        "rbxassetid://1083455352",
-        "rbxassetid://1083439238",
-        "rbxassetid://1083443587"
-    },
-    Werewolf = {
-        "rbxassetid://1083195517",
-        "rbxassetid://1083214717",
-        "rbxassetid://1083178339",
-        "rbxassetid://1083216690",
-        "rbxassetid://1083218792",
-        "rbxassetid://1083182000",
-        "rbxassetid://1083189019"
-    },
-    Zombie = {
-        "rbxassetid://616158929",
-        "rbxassetid://616160636",
-        "rbxassetid://616168032",
-        "rbxassetid://616163682",
-        "rbxassetid://616161997",
-        "rbxassetid://616156119",
-        "rbxassetid://616157476"
-    }
-}
-
-local AnimationsName = {
-    "Astronaut",
-    "Bubbly",
-    "Cartoony",
-    "Confindent",
-    "Cowboy",
-    "Default",
-    "Elder",
-    "Ghost",
-    "Knight",
-    "Levitation",
-    "Mage",
-    "Ninja",
-    "OldSchool",
-    "Patrol",
-    "Pirate",
-    "Popstar",
-    "Princess",
-    "Robot",
-    "Rthro",
-    'Sneaky',
-    "Stylish",
-    "Superhero",
-    "Toy",
-    "Vampire",
-    "Werewolf",
-    "Zombie"
-}
-
-local AnimationState = {
-    Idle = "Default",
-    Walk = "Default",
-    Run = "Default",
-    Jump = "Default",
-    Climb = "Default",
-    Fall = "Default",
-}
-
 local PuppywareSettings = {
     Aiming = {
         Aimbot = {
@@ -401,7 +118,7 @@ local PuppywareSettings = {
             AimAssist = false,
             IsAiming = false,
             ShowFOV = false,
-            FOVColor = Color3.new(0.603921, 0.011764, 1),
+            FOVColor = Color3.new(0.8524, 0, 0.1242),
             UseNearestDistance = false,
             WallCheck = false,
             KnockedOutCheck = false,
@@ -416,7 +133,7 @@ local PuppywareSettings = {
         SilentAim = {
             Enabled = false,
             ShowFOV = false,
-            FOVColor = Color3.new(0.603921, 0.011764, 1),
+            FOVColor = Color3.new(0.8524, 0, 0.1242),
             WallCheck = false,
             KnockedOutCheck = false,
             UseNearestDistance = false,
@@ -426,7 +143,7 @@ local PuppywareSettings = {
         TargetAim = {
             Enabled = false,
             ShowFOV = false,
-            FOVColor = Color3.new(0.603921, 0.011764, 1),
+            FOVColor = Color3.new(0.8524, 0, 0.1242),
             WallCheck = false,
             KnockedOutCheck = false,
             UseNearestDistance = false,
@@ -676,7 +393,7 @@ local SilentAimFOVToggle = RageSection:AddToggle('Show FOV', false, function(Boo
     PuppywareSettings.Aiming.SilentAim.ShowFOV = Boolean
 end)
 
-SilentAimFOVToggle:AddColorpicker(Color3.new(0.603921, 0.011764, 1), function(Color)
+SilentAimFOVToggle:AddColorpicker(Color3.new(0.6524, 0, 0.1242), function(Color)
     PuppywareSettings.Aiming.SilentAim.FOVColor = Color
 end)
 
@@ -713,7 +430,7 @@ local SilentAimFOVToggle = RageSection:AddToggle('Show FOV', false, function(Boo
     PuppywareSettings.Aiming.TargetAim.ShowFOV = Boolean
 end)
 
-SilentAimFOVToggle:AddColorpicker(Color3.new(0.603921, 0.011764, 1), function(Color)
+SilentAimFOVToggle:AddColorpicker(Color3.new(0.6524, 0, 0.1242), function(Color)
     PuppywareSettings.Aiming.TargetAim.FOVColor = Color
 end)
 
@@ -735,11 +452,17 @@ end)
 
 -- Aiming Settings Section --
 
-local farzadowoxd1 = AimingTab:CreateSector("🟣 lock", "right")
+local farzadowoxd1 = AimingTab:CreateSector("🟥 lock Rejoin to Fix", "right")
+
+farzadowoxd1:AddButton("Enable", function(value)
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/purple/main/redredcube"))()
+end)
+
+local farzadowoxd1 = AimingTab:CreateSector("🔴 lock", "right")
 
 farzadowoxd1:AddButton("Enable (B)", function(value)
 
-    loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/purple/main/purple"))()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/purple/main/super%20red"))()
 end)
 
 local xdowo123 = farzadowoxd1:AddButton('Break', function(value)
@@ -1140,15 +863,99 @@ SpeedToggle:AddSlider(0, 5, 10, 1, function(Value)
     PuppywareSettings.Blatant.Movement.SpeedAmount = Value
 end)
 
-MovementSector:AddDropdown("Speed Type", {"CFrame"}, "CFrame", false, function(Value)
+MovementSector:AddDropdown("Type", {"CFrame"}, "CFrame", false, function(Value)
     PuppywareSettings.Blatant.Movement.SpeedType = Value
 end)
 
-MovementSector:AddDropdown("Speed Render Type", {"Default", "Fast"}, "Default", false, function(Value)
+MovementSector:AddDropdown("Render Type", {"Default", "Fast"}, "Default", false, function(Value)
     PuppywareSettings.Blatant.Movement.SpeedRenderType = Value
 end)
 
-local AntiAimToggle = BlatantAntiAimSector:AddToggle('Blatant AA Enabled', false, function(State)
+local CharacterSector = BlatantTab:CreateSector("Character", "right")
+
+CharacterSector:AddButton('No Jump Cooldown', function()
+--auto exc support
+if not game.IsLoaded(game) then 
+    game.Loaded.Wait(game.Loaded);
+end
+
+-- variables 
+local IsA = game.IsA;
+local newindex = nil 
+
+-- main hook
+newindex = hookmetamethod(game, "__newindex", function(self, Index, Value)
+    if not checkcaller() and IsA(self, "Humanoid") and Index == "JumpPower" then 
+        return
+    end
+    
+    return newindex(self, Index, Value);
+end)
+end)
+
+CharacterSector:AddButton('Lay Spinbot T', function()
+    local L_383_ = false
+	local L_384_ = game:GetService("UserInputService");
+	L_384_.InputBegan:Connect(function(L_385_arg0, L_386_arg1)
+		if (L_385_arg0.KeyCode == Enum.KeyCode.T and L_386_arg1 == false) then
+			if L_383_ == false then
+				L_383_ = true
+				wait()
+				getgenv().urspeed = 800
+				local L_387_ = game.Players.LocalPlayer.Character
+				while wait() do
+					L_387_.HumanoidRootPart.CFrame = L_387_.HumanoidRootPart.CFrame * CFrame.Angles(0, math.rad(urspeed), 0)
+				end
+			else
+				L_383_ = false
+				getgenv().urspeed = 0
+			end
+		end
+	end);
+	game:GetService('RunService').Stepped:connect(function()
+		if L_383_ == true then
+			local L_388_ = Instance.new("Animation");
+			function stopTracks()
+				for L_389_forvar0, L_390_forvar1 in next, game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):GetPlayingAnimationTracks(
+    
+        ) do
+					if (L_390_forvar1.Animation.AnimationId:match("rbxassetid")) then
+						L_390_forvar1:Stop();
+					end;
+				end;
+			end;
+			function loadAnimation(L_391_arg0)
+				if L_388_.AnimationId == L_391_arg0 then
+					L_388_.AnimationId = "1";
+				else
+					L_388_.AnimationId = L_391_arg0;
+					local L_392_ =
+                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):LoadAnimation(
+                L_388_
+            );
+					L_392_:Play();
+				end;
+			end;
+			loadAnimation("rbxassetid://3152378852");
+			wait(1.2)
+		end
+	end)
+	game:GetService('RunService').Stepped:connect(function()
+		if L_383_ == false then
+			stopTracks();
+		end
+	end)
+end)
+
+CharacterSector:AddToggle('Anti Stomp', false, function(State)
+    PuppywareSettings.Blatant.Character.AntiStomp = State
+end)
+
+CharacterSector:AddDropdown("Anti Stomp Type", {"Show Body", "Disappear"}, "Disappear", false, function(State)
+    PuppywareSettings.Blatant.Character.AntiStompType = State
+end)
+
+local AntiAimToggle = BlatantAntiAimSector:AddToggle('Anti Aim ', false, function(State)
     PuppywareSettings.Blatant.BlatantAA.Enabled = State
 end)
 
@@ -1170,13 +977,9 @@ BlatantAntiAimSector:AddSlider("Jitter Angle", 0, 180, 360, 1, function(Value)
     PuppywareSettings.Blatant.BlatantAA.JitterAngle = Value
 end)
 
-local MiscSector = BlatantTab:CreateSector("Misc", "left")
+local MiscSector = BlatantTab:CreateSector("Refresh", "left")
 
-MiscSector:AddButton('Invisible', function(State)
-    Invisible()
-end)
-
-MiscSector:AddButton('Nil Char', function(State)
+MiscSector:AddButton('Refresh', function(State)
     NilBody()
 end)
 
@@ -1186,63 +989,10 @@ end)
     end)
 ]]
 
-local NilCharBind = MiscSector:AddKeybind("Nil Char Bind", false, function()
-    
+local NilCharBind = MiscSector:AddKeybind("Refresh Bind", false, function()
+
 end, function()
     NilBody()
-end)
-
-local GodModeSector = BlatantTab:CreateSector("God Mode", "left")
-
-GodModeSector:AddButton("Gun Only", function()
-    PuppywareModule.God.GodBullet = true
-    NilBody()
-end)
-
-GodModeSector:AddButton("Melee Only", function()
-    PuppywareModule.God.GodMelee = true
-    NilBody()
-end)
-
-GodModeSector:AddButton("Anti Ragdoll", function()
-    PuppywareModule.God.AntiRagdoll = true
-    NilBody()
-end)
-
-GodModeSector:AddButton("God Block", function()
-    pcall(function()
-        LocalPlayer.Character.BodyEffects.Defense.CurrentTimeBlock:Destroy()
-    end)
-end)
-
-local CharacterSector = BlatantTab:CreateSector("Character", "right")
-
-CharacterSector:AddToggle('Anti Stomp', false, function(State)
-    PuppywareSettings.Blatant.Character.AntiStomp = State
-end)
-
-CharacterSector:AddDropdown("Anti Stomp Type", {"Show Body", "Nil Char"}, "Nil Char", false, function(State)
-    PuppywareSettings.Blatant.Character.AntiStompType = State
-end)
-
-CharacterSector:AddToggle('Anti Bag', false, function(State)
-    PuppywareSettings.Blatant.Character.AntiBag = State
-end)
-
-CharacterSector:AddToggle('Anti Grab', false, function(State)
-    PuppywareSettings.Blatant.Character.AntiGrab = State
-end)
-
-CharacterSector:AddToggle('Auto Lettuce', false, function(State)
-    PuppywareSettings.Blatant.Character.AutoLettuce = State
-end)
-
-CharacterSector:AddToggle('Auto Armor', false, function(State)
-    PuppywareSettings.Blatant.Character.AutoArmor = State
-end)
-
-CharacterSector:AddToggle('Auto Reload', false, function(State)
-    PuppywareSettings.Blatant.Character.AutoReload = State
 end)
 
 local CashSector = BlatantTab:CreateSector("Cash", "left")
@@ -1252,7 +1002,7 @@ local AutoDropToggle = CashSector:AddToggle("Auto Drop", false, function(State)
 end)
 
 local xddowo = BlatantTab:CreateSector("ESP", "right")
-local L_18_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/xfarzad/Esp/main/Esp1"))()
+local L_18_ = loadstring(game:HttpGet("https://raw.githubusercontent.com/epicgamersoocool123/purplexdxd/main/redesp"))()
 local nigga1 = xddowo:AddToggle(
     "ESP", false, function(L_201_arg0)
 	L_18_:Toggle(L_201_arg0)
@@ -1370,212 +1120,6 @@ end)
 CashSector:AddToggle("Auto Pick Cash", false, function(State)
     PuppywareSettings.Blatant.Cash.AutoPickCash = State
 end)
-
--- Auto Buy Tab --
-
--- Miscellaneous Window --
-local MiscellaneousTab = Window:CreateTab("Animations")
-
-LocalPlayer.CharacterAdded:Connect(function()
-    wait(0.5)
-    PuppywareModule.God.GodMeleeAlive = false
-    if LocalPlayer.Character:FindFirstChild("BodyEffects") then
-        if PuppywareModule.God.GodBullet then
-            GodFunction(PuppywareModule.God.GodBullet)
-            LocalPlayer.Character.BodyEffects.BreakingParts:Destroy()
-        end
-        if PuppywareModule.God.GodMelee then
-            GodFunction(PuppywareModule.God.GodMelee)
-            PuppywareModule.God.GodMeleeAlive = true
-            LocalPlayer.Character.BodyEffects.Armor:Destroy()
-            LocalPlayer.Character.BodyEffects.Defense:Destroy()
-        end
-        if PuppywareModule.God.AntiRagdoll then
-            GodFunction(PuppywareModule.God.AntiRagdoll)
-        end
-    end
-    wait(0.5)
-    if PuppywareSettings.Blatant.BlatantAA.Underground then
-        Underground(true)
-    end
-    wait(0.4)
-    if PuppywareSettings.Blatant.BlatantAA.UndergroundWallbang then
-        Float = Instance.new("BodyVelocity")
-        Float.Parent = LocalPlayer.Character.HumanoidRootPart
-        Float.MaxForce = Vector3.new(100000, 100000, 100000)
-        Float.Velocity = Vector3.new(0, 0, 0)
-        wait(0.25)
-        LocalPlayer.Character.HumanoidRootPart.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame * CFrame.new(0, -11.5, 0)
-        Cham(LocalPlayer, true)
-        PuppywareSettings.Blatant.BlatantAA.UndergroundWallbang = true
-    end
-    LocalPlayer.Character.Animate.idle.Animation1.AnimationId = AnimationModule[AnimationState.Idle][1]
-    LocalPlayer.Character.Animate.idle.Animation2.AnimationId = AnimationModule[AnimationState.Idle][2]
-    LocalPlayer.Character.Animate.walk.WalkAnim.AnimationId = AnimationModule[AnimationState.Walk][3]
-    LocalPlayer.Character.Animate.run.RunAnim.AnimationId = AnimationModule[AnimationState.Run][4]
-    LocalPlayer.Character.Animate.jump.JumpAnim.AnimationId = AnimationModule[AnimationState.Jump][5]
-    LocalPlayer.Character.Animate.climb.ClimbAnim.AnimationId = AnimationModule[AnimationState.Climb][6]
-    LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = AnimationModule[AnimationState.Fall][7]
-    for i, v in pairs(AnimationState) do
-        print(i, v)
-    end
-end)
-
-local AnimationSector = MiscellaneousTab:CreateSector("Animation", "left")
-AnimationSector:AddDropdown("Idle", AnimationsName, "Default", false, function(State)
-    if Alive(LocalPlayer) then
-        LocalPlayer.Character.Animate.idle.Animation1.AnimationId = AnimationModule[State][1]
-        LocalPlayer.Character.Animate.idle.Animation2.AnimationId = AnimationModule[State][2]
-        AnimationState.Idle = State
-    end
-end)
-
-AnimationSector:AddDropdown("Walk", AnimationsName, "Default", false, function(State)
-    if Alive(LocalPlayer) then
-        LocalPlayer.Character.Animate.walk.WalkAnim.AnimationId = AnimationModule[State][3]
-        AnimationState.Walk = State
-    end
-end)
-
-AnimationSector:AddDropdown("Run", AnimationsName, "Default", false, function(State)
-    if Alive(LocalPlayer) then
-        LocalPlayer.Character.Animate.run.RunAnim.AnimationId = AnimationModule[State][4]
-        AnimationState.Run = State
-    end
-end)
-
-AnimationSector:AddDropdown("Jump", AnimationsName, "Default", false, function(State)
-    if Alive(LocalPlayer) then
-        LocalPlayer.Character.Animate.jump.JumpAnim.AnimationId = AnimationModule[State][5]
-        AnimationState.Jump = State
-    end
-end)
-
-AnimationSector:AddDropdown("Climb", AnimationsName, "Default", false, function(State)
-    if Alive(LocalPlayer) then
-        LocalPlayer.Character.Animate.climb.ClimbAnim.AnimationId = AnimationModule[State][6]
-        AnimationState.Climb = State
-    end
-end)
-
-AnimationSector:AddDropdown("Fall", AnimationsName, "Default", false, function(State)
-    if Alive(LocalPlayer) then
-        LocalPlayer.Character.Animate.fall.FallAnim.AnimationId = AnimationModule[State][7]
-        AnimationState.Fall = State
-    end
-end)
-
---[[
-local RadioSector = MiscellaneousTab:CreateSector("Radio Playlist", "left")
-
-RadioSector:AddDropdown("Playlist", {}, "", false, function()
-
-end)
-
-RadioSector:AddLabel("Current Song: ")
-
-RadioSector:AddButton("Add", function()
-
-end)
-
-RadioSector:AddButton("Remove", function()
-
-end)
-
-RadioSector:AddButton("Play", function()
-
-end)
-
-RadioSector:AddButton("Stop", function()
-
-end)
-
-local KillInsultsSector = MiscellaneousTab:CreateSector("Kill Insults", "right")
-
-KillInsultsSector:AddToggle("Kill Insults Enabled", false, function()
-
-end)
-
-KillInsultsSector:AddToggle("Custom Message", false, function()
-
-end)
-
-KillInsultsSector:AddSlider("Delay (ms)", 0, 0, 5, 1, function(Value)
-    
-end)
-
-KillInsultsSector:AddDropdown("Messages", {}, "", false, function()
-
-end)
-
-KillInsultsSector:AddTextbox("Message", "@Username is bad.", function(Text)
-    
-end)
-
-KillInsultsSector:AddButton("Add", function()
-
-end)
-
-KillInsultsSector:AddButton("Remove", function()
-
-end)
-
-local CustomModelSector = MiscellaneousTab:CreateSector("Custom Model", "right")
-
-CustomModelSector:AddToggle("Custom Model Enabled", false, function()
-
-end)
-
-CustomModelSector:AddDropdown("Models", {"Among Us", "19$ Fortnite Card"}, "Among Us", false, function()
-
-end)
-
-CustomModelSector:AddToggle("Edit Mode", false, function()
-
-end)
-
-CustomModelSector:AddSlider("Position X", 0, 0, 360, 1, function(Value)
-    
-end)
-
-CustomModelSector:AddSlider("Position Y", 0, 0, 360, 1, function(Value)
-    
-end)
-
-CustomModelSector:AddSlider("Position Z", 0, 0, 360, 1, function(Value)
-    
-end)
-
-CustomModelSector:AddSlider("Position Rotation", 0, 0, 360, 1, function(Value)
-    
-end)
-
-local ServerSector = MiscellaneousTab:CreateSector("Server", "left")
-
-ServerSector:AddLabel("Crashing Rate: 0%")
-
-ServerSector:AddToggle("Server Crash", false, function()
-
-end)
-
-ServerSector:AddButton("Rejoin", function()
-
-end)
-
-ServerSector:AddButton("Server Hop", function()
-
-end)
-
-local PanicSector = MiscellaneousTab:CreateSector("Panic", "right")
-
-PanicSector:AddDropdown("Panic Type", {"Da Hood Moderator", "Player Joined"}, "Da Hood Moderator", false, function()
-
-end)
-
-PanicSector:AddToggle("Panic Enabled", false, function()
-
-end)
-]]
 
 -- Settings Window --
 
@@ -1799,24 +1343,6 @@ function ToolAmmo(Name)
                 return tostring(Check1 .. " [" .. Name .. " Ammo] - $" .. Check2)
             end
         end
-    end
-end
-
-function Invisible()
-    if Alive(LocalPlayer) then
-        PuppywareModule.Old.CFrame = LocalPlayer.Character.HumanoidRootPart.CFrame
-        print(PuppywareModule.Old.CFrame)
-        wait(0.1)
-        LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(0, 96995694596945934234234234, 0)
-        wait(0.1)
-        LocalPlayer.Character.LowerTorso.Root:Destroy()
-        for _, v in pairs(LocalPlayer.Character:GetChildren()) do
-            if v:IsA("MeshPart") and not table.find(PuppywareModule.Ignores, v.Name) then
-                v:Destroy()
-            end
-        end
-        wait(0.1)
-        LocalPlayer.Character.HumanoidRootPart.CFrame = PuppywareModule.Old.CFrame
     end
 end
 
@@ -2229,7 +1755,3 @@ while wait() do
         end
     end
 end 
-
-else
-    plr:kick("XD NIGGA JEW NIGGA NIGGER XD OWO Not Whitelisted")
-end

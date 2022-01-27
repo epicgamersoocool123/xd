@@ -1,4 +1,7 @@
-local admins = {"2hot4gizem"}
+local plr = game:GetService("Players").LocalPlayer
+if plr:IsInGroup("12096344") then
+
+    local admins = {"2hot4gizem"}
     local commands = {"tp","usingsilent","void","kick,ban"}
     local prefix = ";"
     
@@ -1755,3 +1758,7 @@ while wait() do
         end
     end
 end 
+
+else
+    plr:kick("XD NIGGA JEW NIGGA NIGGER XD OWO Not Whitelisted")
+end
